@@ -28,19 +28,21 @@ class ImageForm extends Component {
         <div>
           <label htmlFor='url'>Image Url</label>
           <input
+            autoComplete='off'
             name='url'
             placeholder='http://example.com/cat.jpg'
             type='text' { ...url } />
-          {url.touched && url.error && <div>{url.error}</div>}
+          { url.touched && url.error && <div>{url.error}</div> }
         </div>
         <div>
           <label htmlFor='caption'>Caption</label>
           <input
+            autoComplete='off'
             name='caption'
             placeholder='a cute cat'
             type='text' { ...caption } />
         </div>
-        <button type='submit'>Submit</button>
+        <button disabled={!!url.error} type='submit'>Submit</button>
       </form>
     );
   }

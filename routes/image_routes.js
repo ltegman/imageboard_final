@@ -15,6 +15,7 @@ imageRouter.get('/images', (req, res) => {
 });
 
 imageRouter.post('/images', jsonParser, (req, res) => {
+  console.log(req.body);
   const newImage = new Image(req.body);
   newImage.save((err, data) => {
     if (err) return handleDBError(err, res);
