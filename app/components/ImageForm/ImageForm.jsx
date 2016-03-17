@@ -24,7 +24,7 @@ class ImageForm extends Component {
   render() {
     const { fields: { url, caption }, handleSubmit } = this.props;
     return (
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit = { handleSubmit }>
         <div>
           <label htmlFor='url'>Image Url</label>
           <input

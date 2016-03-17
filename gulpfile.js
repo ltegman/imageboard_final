@@ -31,23 +31,23 @@ gulp.task('sass:dev', () => {
 });
 
 gulp.task('build:dev', () => {
-  gulp.src('app/index.js')
-    .pipe(webpack({
-      output: {
-        filename: 'bundle.js'
-      },
-      module: {
-        loaders: [
-          {
-            test: /\.jsx?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader'
-          }
-        ]
-      },
-      devtool: 'source-map'
-    }))
-    .pipe(gulp.dest('build/'));
+  webpack({
+    entry: ['babel-polyfill', './app/index.js'],
+    output: {
+      filename: 'bundle.js'
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader'
+        }
+      ]
+    },
+    devtool: 'source-map'
+  })
+  .pipe(gulp.dest('build/'));
 });
 
 gulp.task('build:test', () => {

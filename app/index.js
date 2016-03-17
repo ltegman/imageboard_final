@@ -1,14 +1,20 @@
 import React from 'react';
-import reactDOM from 'react-dom';
-import ImageBoard from './ImageBoard.jsx';
+import { render } from 'react-dom';
+import App from './App.jsx';
 import { Provider } from 'react-redux';
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import reducer from './redux/reducer';
+import createSagaMiddleware from 'redux-saga';
+import { watchImages, watchPostImage } from './redux/sagas';
 
-
-const store = compose(
+const createStoreWithDevTools = compose(
+  applyMiddleware(createSagaMiddleware(watchImages, watchPostImage)),
   window.devToolsExtension ? window.devToolsExtension() : f => f
-)(createStore)(reducer);
+)(createStore);
 
-reactDOM.render(<Provider store = { store }><ImageBoard /></Provider>,
+const store = createStoreWithDevTools(
+  reducer
+);
+
+render(<Provider store = { store }><App /></Provider>,
   document.getElementById('app'));
