@@ -3,10 +3,10 @@ import { call, put } from 'redux-saga/effects';
 import { callApi, postApi } from '../services/api';
 
 function* fetchImages() {
-  try {
-    const images = yield call(callApi, 'images');
-    yield put({ type: 'FETCHED_IMAGES', payload: { images } });
-  } catch (err) {
+  const { response, err } = yield call(callApi, 'images');
+  if (response) {
+    yield put({ type: 'FETCHED_IMAGES', payload: { images: response } });
+  } else {
     yield put({ type: 'FETCH_FAILED', payload: err });
   }
 }
@@ -16,10 +16,10 @@ export function* watchImages() {
 }
 
 function* postImage({ payload }) {
-  try {
-    const image = yield call(postApi, 'images', payload);
-    yield put({ type: 'POSTED_IMAGE', payload: { image } });
-  } catch (err) {
+  const { response, err } = yield call(postApi, 'images', payload);
+  if (response) {
+    yield put({ type: 'POSTED_IMAGE', payload: { image: response } });
+  } else {
     yield put({ type: 'POST_FAILED', payload: err });
   }
 }

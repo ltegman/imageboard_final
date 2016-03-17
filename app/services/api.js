@@ -4,7 +4,9 @@ const API_ROOT = 'http://localhost:3000/api/';
 
 export const callApi = (endpoint) => {
   return fetch(API_ROOT + endpoint)
-    .then((response) => response.json());
+    .then(response => response.json())
+    .then(response => ({ response }))
+    .catch(err => ({ err: err.msg }));
 };
 
 export const postApi = (endpoint, data) => {
@@ -16,5 +18,7 @@ export const postApi = (endpoint, data) => {
     },
     body: JSON.stringify(data.image)
   })
-    .then((response) => response.json());
+    .then(response => response.json())
+    .then(response => ({ response }))
+    .catch(err => ({ err: err.msg }));
 };
