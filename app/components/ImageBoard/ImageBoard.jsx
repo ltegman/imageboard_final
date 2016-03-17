@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-// import ImageForm from './components/ImageForm';
-// import Image from './components/Image';
+import Image from './Image';
 
-export default class extends Component {
-  static displayName = 'ImageBoard'
+export default class ImageBoard extends Component {
   static propTypes = {
     images: PropTypes.array.isRequired,
     fetchImages: PropTypes.func.isRequired
@@ -16,18 +14,15 @@ export default class extends Component {
   render() {
     let imageElements;
     if (this.props.images) {
-      imageElements = this.props.images.map((image, idx) => {
+      imageElements = this.props.images.map((image) => {
         return (
-          <li key = { idx }>
-            <img src = { image.url } style = {{ width: '400px' }}/>
-            <p>{ image.caption }</p>
-          </li>
+          <Image { ...image } key = { image._id } />
         );
       });
     }
     return (
-      <div>
-        <ul>{ imageElements || '' }</ul>
+      <div className = 'image-board'>
+        { imageElements || '' }
       </div>
     );
   }

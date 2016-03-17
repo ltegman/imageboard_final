@@ -20,7 +20,7 @@ gulp.task('static:dev', () => {
 });
 
 gulp.task('sass:dev', () => {
-  gulp.src('app/sass/application.sass')
+  gulp.src('app/sass/main.sass')
     .pipe(maps.init())
     .pipe(sass({
       includePaths: require('node-bourbon').includePaths
